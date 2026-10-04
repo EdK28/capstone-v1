@@ -91,7 +91,7 @@ will-it-sell/
 | v6 | Duplicates removed by app ID instead of name. Removing by name had dropped 1,190 different games that shared a name, including the real Portal 2. | 0.866 |
 | v5 | Removed two leaking features: the Steam Trading Cards store feature (only allowed after a game passes a sales threshold) and DLC count (usually released after a game sells). | 0.866 |
 | v4 | Added a side-by-side comparison of Logistic Regression, Random Forest and Gradient Boosting. | 0.884 |
-| v3 | Rewrote the code in a simpler style, added a majority-class baseline, and ran the hyperparameter search live in the notebook. | 0.884 |
+| v3 | Added a majority-class baseline, and ran the hyperparameter search live in the notebook. | 0.884 |
 | v2 | Added store features (co-op, controller support, achievements and so on) and widened tags from 80 to 120. | 0.889 |
 | v1 | First classifier: paid games, one-hot genres, top tags with opinion tags removed, and numeric listing features. | 0.866 |
 
