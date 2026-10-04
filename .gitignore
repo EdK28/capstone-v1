@@ -1,5 +1,10 @@
+# Raw dataset: too large for GitHub (download link in README.md)
 games.csv
-games_1.csv
+games_data_cleaned.csv
+
+# Created automatically by tools
 .vercel/
 .ipynb_checkpoints/
 __pycache__/
+
+.vercel
