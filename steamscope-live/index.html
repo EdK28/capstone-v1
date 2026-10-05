@@ -98,8 +98,7 @@ const ID_INDEX = new Map();
 /* ---------- live player counts ----------
    The page never calls Steam directly: browsers block that (Steam sends no CORS header).
    Instead it calls LIVE_API, a small server function hosted on the same site (api/players.js),
-   which asks Steam and passes the numbers back. If that function isn't reachable, for example
-   on claude.ai or when the file is opened from disk, every live element simply stays hidden. */
+   which asks Steam and passes the numbers back. If that function isn't reachable. */
 const LIVE_API = '/api/players';
 const LIVE_REFRESH_MS = 60000;
 let LIVE_OK = false, liveTimer = null;
@@ -567,8 +566,8 @@ function modelProb(x){
 
 /* ---------- prediction API ----------
    On Vercel, predictions come from api/predict.py, which runs the real scikit-learn model.
-   The page checks once at startup whether that API answers (probePredictApi). If it doesn't,
-   for example on claude.ai or when the file is opened from disk, the built-in model above is used instead. */
+   The page checks once at startup whether that API answers (probePredictApi).
+*/
 const PREDICT_API = '/api/predict';
 let PREDICT_API_OK = false;
 async function probePredictApi(){
