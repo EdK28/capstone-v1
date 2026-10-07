@@ -1,6 +1,6 @@
 # Will It Sell? and SteamBank
 
-Predict whether an upcoming paid Steam game will find an audience, then compare it with the real market before you decide.
+Predict whether an upcoming paid Steam game will find an audience, then compare it with the real market before deciding.
 
 **Will It Sell?** is a machine learning model that estimates the chance a paid Steam game reaches **20,000 owners**, using only details a developer controls before launch: genres, tags, store features, price, platforms, languages and achievements.
 
@@ -21,23 +21,21 @@ Predict whether an upcoming paid Steam game will find an audience, then compare 
 
 ## Results
 
-Tested on 15,553 held-out games released before 2025:
-
 | Model | ROC AUC |
 | --- | --- |
 | Baseline (always predicts "did not sell") | 0.500 |
 | Logistic Regression | 0.789 |
 | Random Forest | 0.806 |
 | Gradient Boosting (untuned) | 0.829 |
-| **Gradient Boosting (tuned, final model)** | **0.830** |
+| **Gradient Boosting (tuned, final model)** | **0.8296** |
 
 The final model has 0.72 precision and 0.42 recall on games that sold, and 80% accuracy against the baseline's 73%. Gradient Boosting was chosen because it led at every stage, before and after tuning. It also captures combinations of features that a linear model can't, and is small enough (242 trees, about 394 KB) to run in full in the browser.
 
 ## Repository structure
 
 ```
-will-it-sell/
-├── will_it_sell_v7.ipynb      data cleaning, features, model comparison and evaluation
+steambank/
+├── steambank_v.ipynb      data cleaning, features, model comparison and evaluation
 ├── README.md
 ├── .gitignore
 └── steamscope-live/           the website (deploy this folder to Vercel)
@@ -54,12 +52,12 @@ will-it-sell/
 
 **Notebook**
 
-1. Download `games.csv` from the [Steam Games Dataset on Kaggle](https://www.kaggle.com/datasets/fronkongames/steam-games-dataset) and put it next to the notebook. It isn't in this repository because it's about 400 MB, over GitHub's file limit.
+1. Download `games.csv` from the [Steam Games Dataset on Kaggle](https://www.kaggle.com/datasets/fronkongames/steam-games-dataset) and put it next to the notebook.
 2. Install the libraries:
    ```
    pip install pandas numpy scikit-learn matplotlib jupyter
    ```
-3. Open `will_it_sell_v7.ipynb` and run all cells. The hyperparameter search takes a few minutes. The last section exports the model into `steamscope-live/`.
+3. Open `steambank_v.ipynb` and run all cells. The hyperparameter search takes a few minutes. The last section exports the model into `steamscope-live/`.
 
 **Website**
 
@@ -78,7 +76,7 @@ will-it-sell/
 2. **Features:** one-hot genres and store features, the top 120 community tags, log-scaled price and achievements, required age, language count and platforms.
 3. **Model:** scikit-learn's `HistGradientBoostingClassifier`, tuned with `RandomizedSearchCV`, compared against a baseline, Logistic Regression and Random Forest.
 4. **Prediction API:** the notebook saves the model with `joblib`. On Vercel, `api/predict.py` loads it and returns probabilities for the page. The page sends the user's game and all its what-if versions in one request.
-5. **Fallback:** the same trees are also embedded in `index.html` as JSON, so predictions still work when the API isn't reachable (offline or on claude.ai). Both give the same answer, to within rounding.
+5. **Fallback:** the same trees are also embedded in `index.html` as JSON, so predictions still work when the API isn't reachable (offline). Both give the same answer, to within rounding.
 6. **Live data:** browsers can't call Steam's API directly (no CORS header), so `api/players.js` runs on Vercel, fetches the counts, and caches them for 60 seconds.
 
 ## Changelog
