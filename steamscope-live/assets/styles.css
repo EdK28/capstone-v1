@@ -1,7 +1,7 @@
 :root{
   --bg:#1a1e24; --bar:#12151a; --panel:#20252d; --stripe:#242a33; --hover:#2a313c; --line:#2f3743;
   --ink:#dde3ea; --sub:#8c97a6; --link:#6cb4ff; --good:#6cc070; --mid:#d6b04a; --bad:#e2665c; --accent:#6cb4ff;
-  --sans:'IBM Plex Sans',system-ui,-apple-system,'Segoe UI',sans-serif; --mono:'IBM Plex Mono',ui-monospace,Consolas,monospace;
+  --sans:system-ui, 'IBM Plex Sans', -apple-system, 'Segoe UI', sans-serif; --mono:'IBM Plex Mono', ui-monospace, Consolas, monospace;
   color-scheme:dark;
   box-sizing:border-box; padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px);
 }
