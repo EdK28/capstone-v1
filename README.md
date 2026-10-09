@@ -35,11 +35,13 @@ The final model has 0.72 precision and 0.42 recall on games that sold, and 80% a
 
 ```
 steambank/
-├── steambank_v.ipynb      data cleaning, features, model comparison and evaluation
+├── steambank_v.ipynb          Data cleaning, EDA, features, model comparison and evaluation
 ├── README.md
+├── games_data_cleaned.csv     (included once last cell in notebook runs)
 ├── .gitignore
 └── steamscope-live/           the website (deploy this folder to Vercel)
     ├── index.html             SteamScope, the predictor and the market comparison
+    ├── assets/styles.css      CSS stylings for frontend
     ├── api/predict.py         prediction API: runs the saved scikit-learn model
     ├── api/players.js         server function that fetches live player counts from Steam
     ├── model/                 model.joblib and model_info.json, written by the notebook's export cell
@@ -62,18 +64,13 @@ steambank/
 **Website**
 
 - Open `steamscope-live/index.html` in a browser to use it locally (no install needed).
-- To deploy with live player counts, run these commands inside `steamscope-live`:
-  ```
-  npm install -g vercel
-  vercel
-  vercel --prod
-  ```
-  Accept the default settings. See `steamscope-live/README.md` for details.
+- **Live site:** [https://steamscope-live.vercel.app/]
+- Deployed on Vercel from this GitHub repository (Root Directory: `steamscope-live`). Pushing to `main` redeploys automatically. See `steamscope-live/README.md` for details.
 
 ## How it works
 
 1. **Data:** 125,855 Steam games, cleaned to 77,764 paid games released before 2025. A game is labelled `sold` if its estimated owners start at 20,000 or more.
-2. **Features:** one-hot genres and store features, the top 120 community tags, log-scaled price and achievements, required age, language count and platforms.
+2. **Features:** multi-hot genres and store features, the top 120 community tags, log-scaled price and achievements, required age, language count and platforms.
 3. **Model:** scikit-learn's `HistGradientBoostingClassifier`, tuned with `RandomizedSearchCV`, compared against a baseline, Logistic Regression and Random Forest.
 4. **Prediction API:** the notebook saves the model with `joblib`. On Vercel, `api/predict.py` loads it and returns probabilities for the page. The page sends the user's game and all its what-if versions in one request.
 5. **Fallback:** the same trees are also embedded in `index.html` as JSON, so predictions still work when the API isn't reachable (offline). Both give the same answer, to within rounding.
@@ -85,6 +82,7 @@ steambank/
 
 | Version | Change | Tuned ROC AUC |
 | --- | --- | --- |
+| _v | Added EDA (missing values, descriptive statistics, treating outliers, correlation heatmap, trends) and evaluation. Same model results | 0.8296
 | v7 | Trains and tests only on games released before 2025. Recent games hadn't had time to sell (5.1% of 2025 games reached 20,000 owners, against 25.9% of 2021 games), and most had no community tags yet, an easy shortcut that doesn't exist for a real upcoming game. | 0.830 |
 | v6 | Duplicates removed by app ID instead of name. Removing by name had dropped 1,190 different games that shared a name, including the real Portal 2. | 0.866 |
 | v5 | Removed two leaking features: the Steam Trading Cards store feature (only allowed after a game passes a sales threshold) and DLC count (usually released after a game sells). | 0.866 |
