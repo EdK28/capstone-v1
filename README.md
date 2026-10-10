@@ -37,7 +37,7 @@ The final model has 0.72 precision and 0.42 recall on games that sold, and 80% a
 steambank/
 ├── steambank_v.ipynb          Data cleaning, EDA, features, model comparison and evaluation
 ├── README.md
-├── games_data_cleaned.csv     (included once last cell in notebook runs)
+├── games_data_cleaned.csv     cleaned dataset used for training
 ├── .gitignore
 └── steamscope-live/           the website (deploy this folder to Vercel)
     ├── index.html             SteamScope, the predictor and the market comparison
@@ -64,7 +64,7 @@ steambank/
 **Website**
 
 - Open `steamscope-live/index.html` in a browser to use it locally (no install needed).
-- **Live site:** [https://steamscope-live.vercel.app/]
+- **Live site:** https://steamscope-live.vercel.app/
 - Deployed on Vercel from this GitHub repository (Root Directory: `steamscope-live`). Pushing to `main` redeploys automatically. See `steamscope-live/README.md` for details.
 
 ## How it works
