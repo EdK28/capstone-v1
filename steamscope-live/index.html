@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>SteamScope · Steam catalog explorer</title>
+<title>SteamBank</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel='stylesheet' href='assets/styles.css'>
@@ -489,7 +489,7 @@ function bindDevs(params){
 /* ---------- predictor (same v5 model as the notebook) ---------- */
 const PSEL = {g:new Set(), t:new Set(), c:new Set()};
 function viewPredict(){
-  return `<h1>Will it sell?</h1><p class="lede">Describe an upcoming paid game. The Gradient Boosting model from the capstone notebook (ROC AUC 0.830) estimates its chance of reaching 20,000+ owners. It runs in your browser.</p>
+  return `<h1>Will it sell?</h1><p class="lede">Describe an upcoming paid game. The Gradient Boosting model (ROC AUC 0.8296) estimates its chance of reaching 20,000+ owners.</p>
   <div class="predgrid">
     <section class="box form" id="pform">
       <div class="row">
