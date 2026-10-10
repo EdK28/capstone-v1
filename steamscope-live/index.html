@@ -814,7 +814,7 @@ function route(){
     const el = document.getElementById(focusId); el.focus();
     if (caret != null && el.setSelectionRange) try { el.setSelectionRange(caret, caret); } catch (e) {}
   } else if (!/^(f-|tq|dq)/.test(focusId || '')) window.scrollTo(0, 0);
-  document.title = (v === 'app' && ID_INDEX.has(+parts[1]) ? D.n[ID_INDEX.get(+parts[1])] + ' · ' : '') + 'SteamScope';
+  document.title = (v === 'app' && ID_INDEX.has(+parts[1]) ? D.n[ID_INDEX.get(+parts[1])] + ' · ' : '') + 'SteamBank';
 }
 
 load().then(() => {
